@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025d88ea3b64f984292bcb0c6f539ce1, type: 3}
+  m_Name: OpenTowerData
+  m_EditorClassIdentifier: 
+  BuildingId: TOWER_OPEN
+  BuildingName: Open Tower
+  BuildingSprites:
+  - BuildingColor: 1
+    RotationSprites:
+    - {fileID: 21300000, guid: b2a5db7b8a261074697bcab223994745, type: 3}
+  - BuildingColor: 2
+    RotationSprites:
+    - {fileID: 21300000, guid: bce467e332e761547afba29263d06bfc, type: 3}
+  - BuildingColor: 3
+    RotationSprites:
+    - {fileID: 21300000, guid: 2f1f18799043d2d4fb180c0ff69dc4e7, type: 3}
+  - BuildingColor: 4
+    RotationSprites:
+    - {fileID: 21300000, guid: fafafa8177b3f5d4cb5cbfc200a0287d, type: 3}
+  BuildTime: 5
+  BuildingType: 2

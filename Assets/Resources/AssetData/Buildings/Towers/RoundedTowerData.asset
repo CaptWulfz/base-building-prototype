@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025d88ea3b64f984292bcb0c6f539ce1, type: 3}
+  m_Name: RoundedTowerData
+  m_EditorClassIdentifier: 
+  BuildingId: TOWER_ROUNDED
+  BuildingName: Rounded Tower
+  BuildingSprites:
+  - BuildingColor: 1
+    RotationSprites:
+    - {fileID: 21300000, guid: 7da0717147d4a004b98813f62bddab0e, type: 3}
+  - BuildingColor: 2
+    RotationSprites:
+    - {fileID: 21300000, guid: e9e6cd0e5f8012b44b01f69fb6c599cb, type: 3}
+  - BuildingColor: 3
+    RotationSprites:
+    - {fileID: 21300000, guid: ba851ca41d504d04eb666ea53cb843ad, type: 3}
+  - BuildingColor: 4
+    RotationSprites:
+    - {fileID: 21300000, guid: f050046031d2ce849a592e216d3a8d2f, type: 3}
+  BuildTime: 5
+  BuildingType: 2

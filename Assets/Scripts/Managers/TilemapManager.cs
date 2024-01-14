@@ -1,0 +1,116 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+public class TilemapManager : Singleton<TilemapManager>
+{
+    private Grid tilemapGrid;
+    private Tilemap tilemap;
+
+    private TileData tileData;
+    protected override void Initialize()
+    {
+        this.tileData = Resources.Load<TileData>(ResourcesPaths.TILE_DATA_PATH);
+        base.Initialize();
+    }
+
+    public void RegisterTilemap(Tilemap tilemap)
+    {
+        this.tilemap = tilemap;
+    }
+
+    public void RegisterTilemapGrid(Grid grid)
+    {
+        this.tilemapGrid = grid;
+    }
+
+    public Vector3 GetWorldCenterFromTile(Vector3Int tilePos)
+    {
+        return this.tilemapGrid.GetCellCenterWorld(tilePos);
+    }
+
+    public void GenerateTilemap(Vector2Int size)
+    {
+        float tilesPerSideX = size.x / 2;
+        int intTilesPerSideX = Mathf.FloorToInt(tilesPerSideX);
+        int positiveXLimit = size.x % 2 == 0 ? intTilesPerSideX - 1 : intTilesPerSideX;
+
+        float tilesPerSideY = size.y / 2;
+        int intTilesPerSideY = Mathf.FloorToInt(tilesPerSideY);
+        int positiveYLimit = size.y % 2 == 0 ? intTilesPerSideY - 1 : intTilesPerSideY;
+
+        Vector3Int newTilePos = Vector3Int.zero;
+
+        // Iterate through x axis ascending first
+        for (int i = 0; i <= positiveXLimit; i++)
+        {
+            newTilePos.x = i;
+
+            // Iterate through y axis ascending first
+            for (int j = 0; j <= positiveYLimit; j++)
+            {
+                newTilePos.y = j;
+                CreateNewTileAtPositon(newTilePos);
+            }
+
+            for (int j = -1; j >= -intTilesPerSideY; j--)
+            {
+                newTilePos.y = j;
+                CreateNewTileAtPositon(newTilePos);
+            }
+        }
+
+        // Iterate through x axis descending
+        for (int i = -1; i >= -intTilesPerSideX; i--)
+        {
+            newTilePos.x = i;
+
+            // Iterate through y axis ascending first
+            for (int j = 0; j <= positiveYLimit; j++)
+            {
+                newTilePos.y = j;
+                CreateNewTileAtPositon(newTilePos);
+            }
+
+            for (int j = -1; j >= -intTilesPerSideY; j--)
+            {
+                newTilePos.y = j;
+                CreateNewTileAtPositon(newTilePos);
+            }
+        }
+    }
+
+    public void CreateNewTileAtPositon(Vector3Int position)
+    {
+        if (this.tilemap != null)
+        {
+            LandTile newTile = new LandTile();
+            newTile.sprite = this.tileData.TileSprite;
+            newTile.TileState = TileState.AVAILABLE;
+            this.tilemap.SetTile(position, newTile);
+        }
+    }
+
+    public void DeleteTileAtPosition(Vector3Int position)
+    {
+        if (this.tilemap != null)
+        {
+            this.tilemap.SetTile(position, null);
+        }
+    }
+
+    public void TryBuildOnTile(Vector2 mousePos)
+    {
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3Int tilePos = this.tilemapGrid.WorldToCell(mousePos);
+        if (this.tilemap.HasTile(tilePos))
+        {
+            LandTile clickedTile = this.tilemap.GetTile<LandTile>(tilePos);
+            if (clickedTile.TileState == TileState.AVAILABLE)
+            {
+                BuildingManager.Instance.BuildBuilding("WALL", BuildingType.WALL, 0, 0, clickedTile, tilePos);
+            }
+        }
+    }
+}

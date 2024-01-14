@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025d88ea3b64f984292bcb0c6f539ce1, type: 3}
+  m_Name: WallWindowedData
+  m_EditorClassIdentifier: 
+  BuildingId: WALL_WINDOW
+  BuildingName: Window Wall
+  BuildingSprites:
+  - BuildingColor: 0
+    RotationSprites:
+    - {fileID: 21300000, guid: 0ff06c990fb6c0f4b90c1f11289afa2d, type: 3}
+    - {fileID: 21300000, guid: 33f6cd4b845205e47beec87da4e8b983, type: 3}
+  BuildTime: 5
+  BuildingType: 0

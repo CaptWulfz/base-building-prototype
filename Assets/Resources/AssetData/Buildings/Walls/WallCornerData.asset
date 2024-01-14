@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025d88ea3b64f984292bcb0c6f539ce1, type: 3}
+  m_Name: WallCornerData
+  m_EditorClassIdentifier: 
+  BuildingId: WALL_CORNER
+  BuildingName: Corner Wall
+  BuildingSprites:
+  - BuildingColor: 0
+    RotationSprites:
+    - {fileID: 21300000, guid: 4ce9698b0bf218b4eb7ebef91199caba, type: 3}
+    - {fileID: 21300000, guid: 585a2f4da41f26b43985162cad28f08f, type: 3}
+    - {fileID: 21300000, guid: b03da1414a292ba45a1913ad77fb8f2a, type: 3}
+    - {fileID: 21300000, guid: 77ed2b902743fba469980c2bacf2f403, type: 3}
+  BuildTime: 5
+  BuildingType: 0

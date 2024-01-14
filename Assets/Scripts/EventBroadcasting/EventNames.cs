@@ -1,0 +1,7 @@
+public class UIEvents
+{
+    public const string UPDATE_BUILDING_COUNTER = "UPDATE_BUILDING_COUNTER";
+    public const string UPDATE_BUILDING_PROGRESS_BAR = "UPDATE_BUILDING_PROGRESS_BAR";
+    public const string TOGGLE_BUILDING_PROGRESS_BAR = "TOGGLE_BUILDING_PROGRESS_BAR";
+    public const string TOGGLE_BUILD_BUTTON = "TOGGLE_BUILD_BUTTON";
+}
