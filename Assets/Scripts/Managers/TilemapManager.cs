@@ -30,6 +30,13 @@ public class TilemapManager : Singleton<TilemapManager>
         return this.tilemapGrid.GetCellCenterWorld(tilePos);
     }
 
+    public Vector3 GetTileCenterFromMousePos(Vector2 mousePos)
+    {
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3Int tilePos = this.tilemapGrid.WorldToCell(mousePos);
+        return GetWorldCenterFromTile(tilePos);
+    }
+
     public void GenerateTilemap(Vector2Int size)
     {
         float tilesPerSideX = size.x / 2;
@@ -100,17 +107,42 @@ public class TilemapManager : Singleton<TilemapManager>
         }
     }
 
-    public void TryBuildOnTile(Vector2 mousePos)
+    //public void TryBuildOnTile(Vector2 mousePos)
+    //{
+    //    mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+    //    Vector3Int tilePos = this.tilemapGrid.WorldToCell(mousePos);
+    //    if (this.tilemap.HasTile(tilePos))
+    //    {
+    //        LandTile clickedTile = this.tilemap.GetTile<LandTile>(tilePos);
+    //        if (clickedTile.TileState == TileState.AVAILABLE)
+    //        {
+    //            BuildingManager.Instance.BuildBuilding("WALL", BuildingType.WALL, 0, 0, clickedTile, tilePos);
+    //        }
+    //    }
+    //}
+
+    public TileState GetTileAvailabilityFromMousePos(Vector2 mousePos)
     {
+        TileState hoveredTileState = TileState.NO_TILE;
+        LandTile hoveredTile = GetTileFromMousePos(mousePos);
+        if (hoveredTile != null)
+            hoveredTileState = hoveredTile.TileState;
+
+        return hoveredTileState;
+    }
+
+    #region Helpers
+    private LandTile GetTileFromMousePos(Vector2 mousePos)
+    {
+        LandTile tile = null;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3Int tilePos = this.tilemapGrid.WorldToCell(mousePos);
         if (this.tilemap.HasTile(tilePos))
         {
-            LandTile clickedTile = this.tilemap.GetTile<LandTile>(tilePos);
-            if (clickedTile.TileState == TileState.AVAILABLE)
-            {
-                BuildingManager.Instance.BuildBuilding("WALL", BuildingType.WALL, 0, 0, clickedTile, tilePos);
-            }
+            tile = this.tilemap.GetTile<LandTile>(tilePos);
         }
+
+        return tile;
     }
+    #endregion
 }

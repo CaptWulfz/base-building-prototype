@@ -11,7 +11,6 @@ public class InputManager : Singleton<InputManager>
     protected override void Initialize()
     {
         this.Controls = new Controls();
-        this.Controls.Mouse.Enable();
 
         this.AllowInput = true;
         base.Initialize();

@@ -70,6 +70,186 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Building"",
+            ""id"": ""38dc5547-6f50-4f32-969b-8a78ea1d57d7"",
+            ""actions"": [
+                {
+                    ""name"": ""Build"",
+                    ""type"": ""Button"",
+                    ""id"": ""30b9d8d5-2315-4d48-a102-ae404a4b040b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""dd2a6576-e069-4851-ae30-f15f2d7ba344"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ChangeColor"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5808a20-72ca-4c15-a23b-4fee679976b1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""ad4e2421-0dd6-4e4e-8e88-e471b48e6a27"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8394a16d-26f3-4627-ab80-31543eafb0a9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Build"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9e6beacb-9a3f-41c9-8c48-697c3edab185"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""928d412b-dc96-4406-b720-3eb414cb27dc"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ChangeColor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""71e0d59c-9664-47ef-8368-cf21124968e3"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""50041b25-1089-4351-b948-01939722bf3f"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7171b86-1ef1-4c2c-b934-092d03ca347a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""981268de-41c0-4c4e-9830-dcb778618be4"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""fe1dc533-b7ad-44f1-a50f-0cfa65092869"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""8be37060-4a2c-4965-834f-141032ee604e"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""7275ab45-4a69-4ca7-b3b9-6ea54872e7b0"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""73eb9c2f-6476-4978-9599-8c1b39e21b90"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""1e44ea72-3e1f-46b1-9770-2c2e536e69ec"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""44d6480b-0fd0-4904-931d-6e73d4e30d81"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,6 +258,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Mouse = asset.FindActionMap("Mouse", throwIfNotFound: true);
         m_Mouse_LeftClick = m_Mouse.FindAction("LeftClick", throwIfNotFound: true);
         m_Mouse_Position = m_Mouse.FindAction("Position", throwIfNotFound: true);
+        // Building
+        m_Building = asset.FindActionMap("Building", throwIfNotFound: true);
+        m_Building_Build = m_Building.FindAction("Build", throwIfNotFound: true);
+        m_Building_MousePosition = m_Building.FindAction("MousePosition", throwIfNotFound: true);
+        m_Building_ChangeColor = m_Building.FindAction("ChangeColor", throwIfNotFound: true);
+        m_Building_RotateBuilding = m_Building.FindAction("RotateBuilding", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
+        m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -189,9 +379,145 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public MouseActions @Mouse => new MouseActions(this);
+
+    // Building
+    private readonly InputActionMap m_Building;
+    private List<IBuildingActions> m_BuildingActionsCallbackInterfaces = new List<IBuildingActions>();
+    private readonly InputAction m_Building_Build;
+    private readonly InputAction m_Building_MousePosition;
+    private readonly InputAction m_Building_ChangeColor;
+    private readonly InputAction m_Building_RotateBuilding;
+    public struct BuildingActions
+    {
+        private @Controls m_Wrapper;
+        public BuildingActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Build => m_Wrapper.m_Building_Build;
+        public InputAction @MousePosition => m_Wrapper.m_Building_MousePosition;
+        public InputAction @ChangeColor => m_Wrapper.m_Building_ChangeColor;
+        public InputAction @RotateBuilding => m_Wrapper.m_Building_RotateBuilding;
+        public InputActionMap Get() { return m_Wrapper.m_Building; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuildingActions set) { return set.Get(); }
+        public void AddCallbacks(IBuildingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BuildingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BuildingActionsCallbackInterfaces.Add(instance);
+            @Build.started += instance.OnBuild;
+            @Build.performed += instance.OnBuild;
+            @Build.canceled += instance.OnBuild;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
+            @ChangeColor.started += instance.OnChangeColor;
+            @ChangeColor.performed += instance.OnChangeColor;
+            @ChangeColor.canceled += instance.OnChangeColor;
+            @RotateBuilding.started += instance.OnRotateBuilding;
+            @RotateBuilding.performed += instance.OnRotateBuilding;
+            @RotateBuilding.canceled += instance.OnRotateBuilding;
+        }
+
+        private void UnregisterCallbacks(IBuildingActions instance)
+        {
+            @Build.started -= instance.OnBuild;
+            @Build.performed -= instance.OnBuild;
+            @Build.canceled -= instance.OnBuild;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
+            @ChangeColor.started -= instance.OnChangeColor;
+            @ChangeColor.performed -= instance.OnChangeColor;
+            @ChangeColor.canceled -= instance.OnChangeColor;
+            @RotateBuilding.started -= instance.OnRotateBuilding;
+            @RotateBuilding.performed -= instance.OnRotateBuilding;
+            @RotateBuilding.canceled -= instance.OnRotateBuilding;
+        }
+
+        public void RemoveCallbacks(IBuildingActions instance)
+        {
+            if (m_Wrapper.m_BuildingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBuildingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BuildingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BuildingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BuildingActions @Building => new BuildingActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_Move;
+    private readonly InputAction m_Camera_Zoom;
+    public struct CameraActions
+    {
+        private @Controls m_Wrapper;
+        public CameraActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Camera_Move;
+        public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IMouseActions
     {
         void OnLeftClick(InputAction.CallbackContext context);
         void OnPosition(InputAction.CallbackContext context);
+    }
+    public interface IBuildingActions
+    {
+        void OnBuild(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
+        void OnChangeColor(InputAction.CallbackContext context);
+        void OnRotateBuilding(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
     }
 }

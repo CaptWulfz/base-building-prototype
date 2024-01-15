@@ -10,6 +10,7 @@ public class LandTile : Tile
 
 public enum TileState
 {
+    NO_TILE,
     AVAILABLE,
     UNAVAILABLE
 }

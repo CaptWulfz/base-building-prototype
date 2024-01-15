@@ -18,12 +18,14 @@ public class UIBuildOptionsScreen : MonoBehaviour
     {
         ToggleBuildButton(false);
         Initialize();
+        GameManager.Instance.ChangeState(GameState.BUILDING);
     }
 
     private void OnDisable()
     {
         ToggleBuildButton(true);
         ReleaseAllCurrentBuildOptions();
+        GameManager.Instance.ChangeState(GameState.VIEWING);
     }
 
     private void ToggleBuildButton(bool toggle)
@@ -31,11 +33,6 @@ public class UIBuildOptionsScreen : MonoBehaviour
         Parameters param = new Parameters();
         param.AddParameter(ParameterNames.BUILD_BUTTON_TOGGLE, toggle);
         EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_BUILD_BUTTON, param);
-    }
-
-    private void Awake()
-    {
-        this.gameObject.SetActive(false);
     }
 
     private void Initialize()

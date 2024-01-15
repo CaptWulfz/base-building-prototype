@@ -13,10 +13,12 @@ public class UIBuildOption : MonoBehaviour, IUIClickable
     private const string OPTION_BUILD_TIME_FORMAT = "Build Time: {0}s";
 
     private string buildingId;
+    private BuildingType buildingType;
 
     public void SetupUIItem(BuildingData data)
     {
         this.buildingId = data.BuildingId;
+        this.buildingType = data.BuildingType;
         this.optionImage.sprite = data.BuildingSprites[0].RotationSprites[0];
         this.optionName.text = string.Format(OPTION_NAME_FORMAT, data.BuildingName);
         this.optionBuildTime.text = string.Format(OPTION_BUILD_TIME_FORMAT, data.BuildTime);
@@ -32,6 +34,9 @@ public class UIBuildOption : MonoBehaviour, IUIClickable
 
     public void OnClick()
     {
+        if (!InputManager.Instance.AllowInput)
+            return;
 
+        BuildingManager.Instance.SelectActiveBuildingData(this.buildingId, this.buildingType);
     }
 }

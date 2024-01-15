@@ -7,11 +7,16 @@ public class BuildingManager : Singleton<BuildingManager>
 {
     private BuildingDataMap buildingDataMap;
     private Building buildingRef;
+    private BuildingPlaceholder buildingPlaceholder;
 
     public int MaxBuildingCount { get; private set; }
+    public bool BuildingPlaceholderActive { get; private set; }
 
     private int currBuildingCount;
     private BuildingData[] allBuildingData;
+
+    // For Placeholder and Building use
+    private BuildingData activeBuildingData; 
 
     protected override void Initialize()
     {
@@ -19,6 +24,7 @@ public class BuildingManager : Singleton<BuildingManager>
         this.buildingRef = Resources.Load<Building>(ResourcesPaths.BUILDING_PATH);
         this.MaxBuildingCount = this.buildingDataMap.MaxBuildingCount;
         this.allBuildingData = null;
+        this.activeBuildingData = null;
         PoolManager.Instance.CreatePool(PoolId.BUILDING, this.MaxBuildingCount);
         this.currBuildingCount = 0;
 
@@ -45,6 +51,72 @@ public class BuildingManager : Singleton<BuildingManager>
             UpdateBuildingCounterUI();
         }
     }
+
+    public void SelectActiveBuildingData(string buildingId, BuildingType type)
+    {
+        this.activeBuildingData = GetBuildingDataById(buildingId, type);
+        this.buildingPlaceholder.SetData(this.activeBuildingData);
+    }
+
+    public void RemoveActiveBuildingData()
+    {
+        this.activeBuildingData = null;
+    }
+
+    #region Builing Placeholder
+    public void RegisterBuildingPlacholder(BuildingPlaceholder placeholder)
+    {
+        this.buildingPlaceholder = placeholder;
+    }
+
+    public void TryDisplayPlaceholder(Vector2 mousePos)
+    {
+        TileState hoveredTile = TilemapManager.Instance.GetTileAvailabilityFromMousePos(mousePos);
+
+        if (hoveredTile == TileState.NO_TILE)
+        {
+            this.buildingPlaceholder.TogglePlacholder(false);
+            this.BuildingPlaceholderActive = false;
+        } else
+        {
+            if (!this.buildingPlaceholder.IsReady)
+                return;
+            this.buildingPlaceholder.ChangeTileHighlightColor(hoveredTile == TileState.AVAILABLE);
+            this.buildingPlaceholder.TogglePlacholder(true);
+            this.buildingPlaceholder.ChangePosition(TilemapManager.Instance.GetTileCenterFromMousePos(mousePos));
+
+            this.BuildingPlaceholderActive = true;
+        }
+    }
+
+    public void HideBuildingPlaceholder()
+    {
+        this.buildingPlaceholder.ClearData();
+        this.buildingPlaceholder.TogglePlacholder(false);
+    }
+
+    public void ChangePlaceholderColor()
+    {
+        if (!this.BuildingPlaceholderActive)
+            return;
+
+        if (!this.buildingPlaceholder.IsReady)
+            return;
+
+        this.buildingPlaceholder.ChangePlaceholderColor();
+    }
+
+    public void ChangePlaceholderRotation()
+    {
+        if (!this.BuildingPlaceholderActive)
+            return;
+
+        if (!this.buildingPlaceholder.IsReady)
+            return;
+
+        this.buildingPlaceholder.ChangePlaceholderRotation();
+    }
+    #endregion
 
     private void UpdateBuildingCounterUI()
     {
