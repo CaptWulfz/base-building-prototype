@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Building : MonoBehaviour
@@ -9,9 +10,11 @@ public class Building : MonoBehaviour
 
     private const float IN_PROGRESS_ALPHA_VALUE = 0.25f;
     private const float DONE_ALPHA_VALUE = 1f;
+    private const float BUILDING_MODE_ALPHA_VALUE = 0.5f;
 
     private Color inProgressColor;
     private Color doneColor;
+    private Color buildingModeColor;
 
     private string buildingId;
     private float buildTime;
@@ -33,6 +36,7 @@ public class Building : MonoBehaviour
 
         this.inProgressColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, IN_PROGRESS_ALPHA_VALUE);
         this.doneColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, DONE_ALPHA_VALUE);
+        this.buildingModeColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, BUILDING_MODE_ALPHA_VALUE);
     }
 
     private void Update()
@@ -63,9 +67,21 @@ public class Building : MonoBehaviour
         this.buildingProgressBar.ToggleBuildingProgressBar(true);
     }
 
+    public void TrySetToBuildingModeTransparency()
+    {
+        if (GameManager.Instance.GameState == GameState.BUILDING)
+            this.buildingRenderer.color = this.buildingModeColor;
+    }
+
+    public void ResetBuildingModeTransparency()
+    {
+        this.buildingRenderer.color = this.buildingState == BuildingState.DONE ? this.doneColor : this.inProgressColor;
+    }
+
     private void FinishBuilding()
     {
-       this.buildingRenderer.color = this.doneColor;
+        this.buildingRenderer.color = this.doneColor;
+        TrySetToBuildingModeTransparency();
         this.buildingState = BuildingState.DONE;
         this.currBuildTime = 0f;
         this.buildStart = false;

@@ -9,6 +9,8 @@ public class BuildingManager : Singleton<BuildingManager>
     private Building buildingRef;
     private BuildingPlaceholder buildingPlaceholder;
 
+    private List<Building> builtBuildingsList;
+
     public int MaxBuildingCount { get; private set; }
     public bool BuildingPlaceholderActive { get; private set; }
 
@@ -22,6 +24,7 @@ public class BuildingManager : Singleton<BuildingManager>
     {
         this.buildingDataMap = Resources.Load<BuildingDataMap>(ResourcesPaths.BUILDING_DATA_MAP_PATH);
         this.buildingRef = Resources.Load<Building>(ResourcesPaths.BUILDING_PATH);
+        this.builtBuildingsList = new List<Building>();
         this.MaxBuildingCount = this.buildingDataMap.MaxBuildingCount;
         this.allBuildingData = null;
         this.activeBuildingData = null;
@@ -31,12 +34,11 @@ public class BuildingManager : Singleton<BuildingManager>
         base.Initialize();
     }
 
-    public void BuildBuilding(string buildingId, BuildingType type, int colorIdx, int spriteIdx, LandTile tileDestination, Vector3Int tilePos)
+    public void BuildBuilding(BuildingData data, int colorIdx, int spriteIdx, LandTile tileDestination)
     {
         if (this.currBuildingCount >= this.MaxBuildingCount)
             return;
 
-        BuildingData data = GetBuildingDataById(buildingId, type);
         if (data != null)
         {
             Building newBuilding = PoolManager.Instance.BuildingPool.Get(() => {
@@ -44,11 +46,23 @@ public class BuildingManager : Singleton<BuildingManager>
             });
             newBuilding.SetData(data, colorIdx, spriteIdx);
             newBuilding.Build();
-            newBuilding.transform.position = TilemapManager.Instance.GetWorldCenterFromTile(tilePos);
+            newBuilding.transform.position = TilemapManager.Instance.GetWorldCenterFromTile(tileDestination.TilePos);
+            this.builtBuildingsList.Add(newBuilding);
             tileDestination.TileState = TileState.UNAVAILABLE;
             this.currBuildingCount++;
 
             UpdateBuildingCounterUI();
+        }
+    }
+
+    public void ToggleActiveBuildingsBuildingMode(bool toggle)
+    {
+        foreach (Building building in this.builtBuildingsList)
+        {
+            if (toggle)
+                building.TrySetToBuildingModeTransparency();
+            else
+                building.ResetBuildingModeTransparency();
         }
     }
 
@@ -61,6 +75,23 @@ public class BuildingManager : Singleton<BuildingManager>
     public void RemoveActiveBuildingData()
     {
         this.activeBuildingData = null;
+    }
+
+    public void TryBuildBuilding(Vector2 mousePos)
+    {
+        if (!this.buildingPlaceholder.IsReady)
+            return;
+
+        LandTile tile = TilemapManager.Instance.GetTileFromMousePos(mousePos);
+
+        if (tile == null)
+            return;
+
+        if (tile.TileState == TileState.AVAILABLE)
+        {
+            PendingBuilding pendingBuilding = this.buildingPlaceholder.GetPendingBuildingData();
+            BuildBuilding(pendingBuilding.buildingData, pendingBuilding.colorIdx, pendingBuilding.rotationIdx, tile);
+        }
     }
 
     #region Builing Placeholder

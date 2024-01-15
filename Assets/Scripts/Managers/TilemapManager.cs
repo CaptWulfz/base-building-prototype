@@ -95,6 +95,7 @@ public class TilemapManager : Singleton<TilemapManager>
             LandTile newTile = new LandTile();
             newTile.sprite = this.tileData.TileSprite;
             newTile.TileState = TileState.AVAILABLE;
+            newTile.TilePos = position;
             this.tilemap.SetTile(position, newTile);
         }
     }
@@ -131,8 +132,7 @@ public class TilemapManager : Singleton<TilemapManager>
         return hoveredTileState;
     }
 
-    #region Helpers
-    private LandTile GetTileFromMousePos(Vector2 mousePos)
+    public LandTile GetTileFromMousePos(Vector2 mousePos)
     {
         LandTile tile = null;
         mousePos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -144,5 +144,4 @@ public class TilemapManager : Singleton<TilemapManager>
 
         return tile;
     }
-    #endregion
 }

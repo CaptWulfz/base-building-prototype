@@ -62,6 +62,11 @@ public class BuildingPlaceholder : MonoBehaviour
     {
         this.tileRenderer.color = this.tileAvailable ? availableColor : unavailableColor;
     }
+    
+    public PendingBuilding GetPendingBuildingData()
+    {
+        return new PendingBuilding(this.buildingData, this.colorSpriteIdx, this.rotationSpriteIdx);
+    }
 
 
     #region Placeholder Sprite Change Methods
@@ -112,4 +117,18 @@ public class BuildingPlaceholder : MonoBehaviour
         
     }
     #endregion
+}
+
+public struct PendingBuilding
+{
+    public BuildingData buildingData;
+    public int colorIdx;
+    public int rotationIdx;
+
+    public PendingBuilding(BuildingData data, int color, int rotation)
+    {
+        this.buildingData = data;
+        this.colorIdx = color;
+        this.rotationIdx = rotation;
+    }
 }

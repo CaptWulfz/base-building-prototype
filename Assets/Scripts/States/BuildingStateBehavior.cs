@@ -15,6 +15,7 @@ public class BuildingStateBehavior : StateBehavior
         this.buildingControls.Build.performed += _ => OnBuild();
         this.buildingControls.ChangeColor.performed += _ => OnChangeColor();
         this.buildingControls.RotateBuilding.performed += _ => OnRotateBuilding();
+        BuildingManager.Instance.ToggleActiveBuildingsBuildingMode(true); ;
     }
 
     public override void OnExit()
@@ -25,6 +26,7 @@ public class BuildingStateBehavior : StateBehavior
         this.buildingControls.RotateBuilding.performed -= _ => OnRotateBuilding();
         BuildingManager.Instance.RemoveActiveBuildingData();
         BuildingManager.Instance.HideBuildingPlaceholder();
+        BuildingManager.Instance.ToggleActiveBuildingsBuildingMode(false);
     }
 
     public override void OnUpdate()
@@ -41,8 +43,8 @@ public class BuildingStateBehavior : StateBehavior
         if (!InputManager.Instance.AllowInput)
             return;
 
-        //Vector2 mousePos = this.buildingControls.MousePosition.ReadValue<Vector2>();
-        //TilemapManager.Instance.TryBuildOnTile(mousePos);
+        Vector2 mouse = this.buildingControls.MousePosition.ReadValue<Vector2>();
+        BuildingManager.Instance.TryBuildBuilding(mouse);
     }
 
     private void TryDisplayPlaceholder()
