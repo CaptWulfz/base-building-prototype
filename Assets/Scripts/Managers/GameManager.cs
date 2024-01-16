@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     {
         this.statesList.Add(GameState.VIEWING, new ViewingStateBehavior());
         this.statesList.Add(GameState.BUILDING, new BuildingStateBehavior());
+        this.statesList.Add(GameState.DESTROYING, new DestroyingStateBehavior());
     }
 
     private void CreateStateUpdateRunner()

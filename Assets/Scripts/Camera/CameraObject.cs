@@ -14,6 +14,8 @@ public class CameraObject : MonoBehaviour
     [SerializeField] float velocity;
     [SerializeField] float smoothTime;
 
+    private static Vector3 CAMERA_CENTER_POSITION = new Vector3(0, 0, -10);
+
     private Camera cam;
     private Transform cameraTransform;
 
@@ -36,5 +38,10 @@ public class CameraObject : MonoBehaviour
         this.zoom -= scroll * this.zoomMultiplier;
         this.zoom = Mathf.Clamp(this.zoom, this.minZoom, this.maxZoom);
         this.cam.orthographicSize = Mathf.SmoothDamp(this.cam.orthographicSize, zoom, ref this.velocity, this.smoothTime);
+    }
+
+    public void Center()
+    {
+        this.cameraTransform.position = CAMERA_CENTER_POSITION;
     }
 }

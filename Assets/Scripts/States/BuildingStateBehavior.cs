@@ -15,7 +15,8 @@ public class BuildingStateBehavior : StateBehavior
         this.buildingControls.Build.performed += _ => OnBuild();
         this.buildingControls.ChangeColor.performed += _ => OnChangeColor();
         this.buildingControls.RotateBuilding.performed += _ => OnRotateBuilding();
-        BuildingManager.Instance.ToggleActiveBuildingsBuildingMode(true); ;
+        BuildingManager.Instance.ToggleActiveBuildingsEditMode(true);
+        ToggleBuildingModeUI(true);
     }
 
     public override void OnExit()
@@ -26,7 +27,8 @@ public class BuildingStateBehavior : StateBehavior
         this.buildingControls.RotateBuilding.performed -= _ => OnRotateBuilding();
         BuildingManager.Instance.RemoveActiveBuildingData();
         BuildingManager.Instance.HideBuildingPlaceholder();
-        BuildingManager.Instance.ToggleActiveBuildingsBuildingMode(false);
+        BuildingManager.Instance.ToggleActiveBuildingsEditMode(false);
+        ToggleBuildingModeUI(false);
     }
 
     public override void OnUpdate()
@@ -53,7 +55,7 @@ public class BuildingStateBehavior : StateBehavior
             return;
 
         Vector2 mouse = this.buildingControls.MousePosition.ReadValue<Vector2>();
-        BuildingManager.Instance.TryDisplayPlaceholder(mouse);
+        BuildingManager.Instance.TryDisplayBuildingPlaceholder(mouse);
     }
 
     private void OnChangeColor()
@@ -70,6 +72,15 @@ public class BuildingStateBehavior : StateBehavior
             return;
 
         BuildingManager.Instance.ChangePlaceholderRotation();
+    }
+    #endregion
+
+    #region Event Broadcaster Callers
+    private void ToggleBuildingModeUI(bool toggle)
+    {
+        Parameters param = new Parameters();
+        param.AddParameter(ParameterNames.BUILDING_MODE_UI_TOGGLE, toggle);
+        EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_BUILDING_MODE_UI, param);
     }
     #endregion
 }

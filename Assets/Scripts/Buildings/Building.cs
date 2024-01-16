@@ -10,11 +10,11 @@ public class Building : MonoBehaviour
 
     private const float IN_PROGRESS_ALPHA_VALUE = 0.25f;
     private const float DONE_ALPHA_VALUE = 1f;
-    private const float BUILDING_MODE_ALPHA_VALUE = 0.5f;
+    private const float EDIT_MODE_ALPHA_VALUE = 0.5f;
 
     private Color inProgressColor;
     private Color doneColor;
-    private Color buildingModeColor;
+    private Color editModeColor;
 
     private string buildingId;
     private float buildTime;
@@ -36,7 +36,16 @@ public class Building : MonoBehaviour
 
         this.inProgressColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, IN_PROGRESS_ALPHA_VALUE);
         this.doneColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, DONE_ALPHA_VALUE);
-        this.buildingModeColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, BUILDING_MODE_ALPHA_VALUE);
+        this.editModeColor = new Color(this.buildingRenderer.color.r, this.buildingRenderer.color.g, this.buildingRenderer.color.b, EDIT_MODE_ALPHA_VALUE);
+    }
+
+    public void ClearData()
+    {
+        this.buildingId = null;
+        this.buildingRenderer.sprite = null;
+        this.buildTime = 0;
+        this.buildingType = BuildingType.WALL;
+        this.inhabitedTile = null;
     }
 
     private void Update()
@@ -67,13 +76,16 @@ public class Building : MonoBehaviour
         this.buildingProgressBar.ToggleBuildingProgressBar(true);
     }
 
-    public void TrySetToBuildingModeTransparency()
+    public void TrySetToEditModeTransparency()
     {
-        if (GameManager.Instance.GameState == GameState.BUILDING)
-            this.buildingRenderer.color = this.buildingModeColor;
+        if (this.buildingState == BuildingState.IN_PROGRESS)
+            return;
+
+        if (GameManager.Instance.GameState == GameState.BUILDING || GameManager.Instance.GameState == GameState.DESTROYING)
+            this.buildingRenderer.color = this.editModeColor;
     }
 
-    public void ResetBuildingModeTransparency()
+    public void ResetEditModeTransparency()
     {
         this.buildingRenderer.color = this.buildingState == BuildingState.DONE ? this.doneColor : this.inProgressColor;
     }
@@ -81,8 +93,8 @@ public class Building : MonoBehaviour
     private void FinishBuilding()
     {
         this.buildingRenderer.color = this.doneColor;
-        TrySetToBuildingModeTransparency();
         this.buildingState = BuildingState.DONE;
+        TrySetToEditModeTransparency();
         this.currBuildTime = 0f;
         this.buildStart = false;
     }

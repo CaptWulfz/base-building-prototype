@@ -12,7 +12,8 @@ public class CameraController : MonoBehaviour
     {
         this.cameraObj = this.GetComponent<CameraObject>();
         this.cameraControls = InputManager.Instance.Controls.Camera;
-        this.cameraControls.Enable();      
+        this.cameraControls.Enable();
+        this.cameraControls.Center.performed += _ => CenterCamera();
     }
 
     // Update is called once per frame
@@ -36,5 +37,10 @@ public class CameraController : MonoBehaviour
         // Limit Value to -0.1 and 0.1 as the default value is 120
         zoom = Mathf.Clamp(zoom, -0.1f, 0.1f);
         this.cameraObj.Zoom(zoom);
+    }
+
+    private void CenterCamera()
+    {
+        this.cameraObj.Center();
     }
 }

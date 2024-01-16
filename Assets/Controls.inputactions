@@ -138,6 +138,54 @@
             ]
         },
         {
+            "name": "Destroying",
+            "id": "2a8f2757-576a-437a-a769-2eed728fab6a",
+            "actions": [
+                {
+                    "name": "Destroy",
+                    "type": "Button",
+                    "id": "0bee3575-e8bc-4530-9349-a50b3f037e0c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "59afb883-9e38-40c7-83de-1ffcbbfe1b1e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9fe49426-3cfa-46bf-8dc8-5b9a2c2233cc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Destroy",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "96151106-c2d5-440c-8c25-1bc2cc5b23bb",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Camera",
             "id": "50041b25-1089-4351-b948-01939722bf3f",
             "actions": [
@@ -149,6 +197,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Center",
+                    "type": "Button",
+                    "id": "90b42d05-cb84-4a16-9b51-2053c5b0174d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Zoom",
@@ -224,6 +281,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d68e28dd-5bcd-4cdc-94a5-74536ceb79bc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Center",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

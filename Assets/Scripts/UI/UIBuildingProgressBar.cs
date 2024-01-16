@@ -7,6 +7,11 @@ public class UIBuildingProgressBar : MonoBehaviour
 {
     private Slider progressBar;
 
+    private void OnEnable()
+    {
+        this.progressBar.value = 0f;
+    }
+
     private void Awake()
     {
         //EventBroadcaster.Instance.RemoveObserver(UIEvents.UPDATE_BUILDING_PROGRESS_BAR);

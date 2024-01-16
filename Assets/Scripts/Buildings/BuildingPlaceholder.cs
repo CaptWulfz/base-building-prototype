@@ -43,7 +43,7 @@ public class BuildingPlaceholder : MonoBehaviour
         this.IsReady = false;
     }
 
-    public void TogglePlacholder(bool toggle)
+    public void TogglePlaceholder(bool toggle)
     {
         this.gameObject.SetActive(toggle);
     }

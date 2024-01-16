@@ -14,11 +14,16 @@ public class UIBuildOptionsScreen : MonoBehaviour
     private BuildOptionsTab selectedTab;
     private BuildingData[] activeBuildingData;
 
+    private void Awake()
+    {
+        EventBroadcaster.Instance.RemoveObserver(UIEvents.TOGGLE_BUILDING_MODE_UI);
+        EventBroadcaster.Instance.AddObserver(UIEvents.TOGGLE_BUILDING_MODE_UI, ToggleBuildingModeUIEvent);
+        this.gameObject.SetActive(false);
+    }
     private void OnEnable()
     {
         ToggleBuildButton(false);
         Initialize();
-        GameManager.Instance.ChangeState(GameState.BUILDING);
     }
 
     private void OnDisable()
@@ -33,6 +38,10 @@ public class UIBuildOptionsScreen : MonoBehaviour
         Parameters param = new Parameters();
         param.AddParameter(ParameterNames.BUILD_BUTTON_TOGGLE, toggle);
         EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_BUILD_BUTTON, param);
+
+        Parameters param2 = new Parameters();
+        param2.AddParameter(ParameterNames.DESTROY_BUTTON_POSITION, toggle ? DestroyButtonPosition.ONE : DestroyButtonPosition.TWO);
+        EventBroadcaster.Instance.PostEvent(UIEvents.CHANGE_DESTROY_BUTTON_POSITION, param2);
     }
 
     private void Initialize()
@@ -124,6 +133,14 @@ public class UIBuildOptionsScreen : MonoBehaviour
     public void OnCloseButton()
     {
         this.gameObject.SetActive(false);
+    }
+    #endregion
+
+    #region Event Broadcaster Events
+    private void ToggleBuildingModeUIEvent(Parameters param)
+    {
+        bool toggle = param.GetParameter<bool>(ParameterNames.BUILDING_MODE_UI_TOGGLE, false);
+        this.gameObject.SetActive(toggle);
     }
     #endregion
 }
