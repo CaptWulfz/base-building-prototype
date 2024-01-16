@@ -93,6 +93,10 @@ public class TilemapManager : Singleton<TilemapManager>
         }
 
         GameManager.Instance.ToggleBlackOverlay(false);
+        
+        Parameters param2 = new Parameters();
+        param2.AddParameter<bool>(ParameterNames.CAMERA_HELP_SCREEN_TOGGLE, true);
+        EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_CAMERA_HELP_SCREEN, param2);
     }
 
     public void CreateNewTileAtPositon(Vector3Int position)

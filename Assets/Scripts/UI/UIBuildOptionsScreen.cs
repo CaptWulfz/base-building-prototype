@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class UIBuildOptionsScreen : MonoBehaviour
+public class UIBuildOptionsScreen : UIDisplay
 {
     [SerializeField] UIBuildOptionsTab[] buildOptionsTabs; 
     [SerializeField] UIBuildOption buildOptionRef;

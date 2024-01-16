@@ -14,6 +14,7 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public int MaxBuildingCount { get; private set; }
     private bool buildingPlaceholderActive;
+    public bool AllowEditing { get; set; }
 
     private int currBuildingCount;
     private BuildingData[] allBuildingData;
@@ -37,6 +38,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void BuildBuilding(BuildingData data, int colorIdx, int spriteIdx, LandTile tileDestination)
     {
+        if (!this.AllowEditing)
+            return;
+
         if (this.currBuildingCount >= this.MaxBuildingCount)
             return;
 
@@ -60,6 +64,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void DestroyBuilding(LandTile tile)
     {
+        if (!this.AllowEditing)
+            return;
+
         Building building = tile.inhabitingBuilding;
 
         if (building == null)
@@ -104,6 +111,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void TryBuildBuilding(Vector2 mousePos)
     {
+        if (!this.AllowEditing)
+            return;
+
         if (!this.buildingPlaceholder.IsReady)
             return;
 
@@ -121,6 +131,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void TryDestroyBuilding(Vector2 mousePos)
     {
+        if (!this.AllowEditing)
+            return;
+
         LandTile tile = TilemapManager.Instance.GetTileFromMousePos(mousePos);
 
         if (tile == null)
@@ -138,6 +151,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void TryDisplayBuildingPlaceholder(Vector2 mousePos)
     {
+        if (!this.AllowEditing)
+            return;
+
         TileState hoveredTile = TilemapManager.Instance.GetTileAvailabilityFromMousePos(mousePos);
 
         if (hoveredTile == TileState.NO_TILE)
@@ -156,12 +172,14 @@ public class BuildingManager : Singleton<BuildingManager>
         }
     }
 
-    public void HideBuildingPlaceholder()
+    public void HideBuildingPlaceholder(bool clearData = true)
     {
-        this.buildingPlaceholder.ClearData();
+        if (clearData)
+            this.buildingPlaceholder.ClearData();
         this.buildingPlaceholder.TogglePlaceholder(false);
         this.buildingPlaceholderActive = false;
     }
+
 
     public void ChangePlaceholderColor()
     {
@@ -194,6 +212,9 @@ public class BuildingManager : Singleton<BuildingManager>
 
     public void TryDisplayDestroyingPlaceholder(Vector2 mousePos)
     {
+        if (!this.AllowEditing)
+            return;
+
         TileState hoveredTile = TilemapManager.Instance.GetTileAvailabilityFromMousePos(mousePos);
 
         if (hoveredTile == TileState.NO_TILE)

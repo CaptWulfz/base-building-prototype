@@ -10,7 +10,7 @@ public class UIBlackOverlay : MonoBehaviour
     private void Awake()
     {
         GameManager.Instance.RegisterBlackOverlay(this);
-        ToggleOverlay(false);
+        //ToggleOverlay(false);
     }
 
     public void ToggleOverlay(bool toggle)

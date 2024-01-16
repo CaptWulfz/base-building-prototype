@@ -13,6 +13,7 @@ public class DestroyingStateBehavior : StateBehavior
         this.destroyingControls.Enable();
         this.destroyingControls.Destroy.performed += _ => OnDestroy();
         BuildingManager.Instance.ToggleActiveBuildingsEditMode(true);
+        BuildingManager.Instance.AllowEditing = true;
         ToggleDestroyModeUI(true);
     }
 
@@ -22,6 +23,7 @@ public class DestroyingStateBehavior : StateBehavior
         this.destroyingControls.Destroy.performed -= _ => OnDestroy();
         BuildingManager.Instance.HideDestroyingPlaceholder();
         BuildingManager.Instance.ToggleActiveBuildingsEditMode(false);
+        BuildingManager.Instance.AllowEditing = false;
         ToggleDestroyModeUI(false);
     }
 

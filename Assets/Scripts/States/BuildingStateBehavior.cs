@@ -16,6 +16,7 @@ public class BuildingStateBehavior : StateBehavior
         this.buildingControls.ChangeColor.performed += _ => OnChangeColor();
         this.buildingControls.RotateBuilding.performed += _ => OnRotateBuilding();
         BuildingManager.Instance.ToggleActiveBuildingsEditMode(true);
+        BuildingManager.Instance.AllowEditing = true;
         ToggleBuildingModeUI(true);
     }
 
@@ -28,6 +29,7 @@ public class BuildingStateBehavior : StateBehavior
         BuildingManager.Instance.RemoveActiveBuildingData();
         BuildingManager.Instance.HideBuildingPlaceholder();
         BuildingManager.Instance.ToggleActiveBuildingsEditMode(false);
+        BuildingManager.Instance.AllowEditing = false;
         ToggleBuildingModeUI(false);
     }
 

@@ -8,4 +8,5 @@ public class ParameterNames
     public const string BUILDING_MODE_UI_TOGGLE = "BUILDING_MODE_UI_TOGGLE";
     public const string DESTROY_MODE_UI_TOGGLE = "DESTROY_MODE_UI_TOGGLE";
     public const string TILEMAP_GENERATION_SCREEN_TOGGLE = "TILEMAP_GENERATION_SCREEN_TOGGLE";
+    public const string CAMERA_HELP_SCREEN_TOGGLE = "CAMERA_HELP_SCREEN_TOGGLE";
 }

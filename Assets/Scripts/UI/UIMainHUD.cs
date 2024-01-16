@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIMainHUD : MonoBehaviour
+public class UIMainHUD : UIDisplay
 {
     [SerializeField] GameObject buildButton;
     [SerializeField] GameObject destroyButton;
@@ -30,6 +30,13 @@ public class UIMainHUD : MonoBehaviour
     public void TurnOnDestroyMode()
     {
         GameManager.Instance.ChangeState(GameState.DESTROYING);
+    }
+
+    public void TurnOnCameraHelp()
+    {
+        Parameters param = new Parameters();
+        param.AddParameter<bool>(ParameterNames.CAMERA_HELP_SCREEN_TOGGLE, true);
+        EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_CAMERA_HELP_SCREEN, param);
     }
     #endregion
 
