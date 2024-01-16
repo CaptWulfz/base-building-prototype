@@ -7,4 +7,5 @@ public class ParameterNames
     public const string DESTROY_BUTTON_POSITION = "DESTROY_BUTTON_POSITION";
     public const string BUILDING_MODE_UI_TOGGLE = "BUILDING_MODE_UI_TOGGLE";
     public const string DESTROY_MODE_UI_TOGGLE = "DESTROY_MODE_UI_TOGGLE";
+    public const string TILEMAP_GENERATION_SCREEN_TOGGLE = "TILEMAP_GENERATION_SCREEN_TOGGLE";
 }

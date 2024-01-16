@@ -20,7 +20,6 @@ public class BaseTilemapEditor : Editor
 
         if (GUILayout.Button("Create Tile"))
         {
-            Debug.Log("QQQ Vector 3: " + this.baseTilemap.vectorPos);
             TilemapManager.Instance.CreateNewTileAtPositon(this.baseTilemap.vectorPos);
         }
 
@@ -33,10 +32,5 @@ public class BaseTilemapEditor : Editor
         {
             TilemapManager.Instance.GenerateTilemap(this.baseTilemap.tilemapSize);
         }
-
-        //if (GUILayout.Button("Delete Tilemap"))
-        //{
-            
-        //}
     }
 }

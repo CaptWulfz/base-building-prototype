@@ -8,6 +8,8 @@ public class GameManager : Singleton<GameManager>
     private Dictionary<GameState, StateBehavior> statesList;
     private StateUpdateRunner stateUpdateRunner;
 
+    private UIBlackOverlay blackOverlay;
+
     public GameState GameState { get; set; }
 
     protected override void Initialize()
@@ -47,6 +49,23 @@ public class GameManager : Singleton<GameManager>
         {
             this.statesList[this.GameState].OnUpdate();
         };
+    }
+
+    public void RegisterBlackOverlay(UIBlackOverlay overlay)
+    {
+        this.blackOverlay = overlay;
+    }
+
+    public void ToggleBlackOverlay(bool toggle)
+    {
+        if (this.blackOverlay != null)
+            this.blackOverlay.ToggleOverlay(toggle);
+    }
+
+    public void ToggleBlackOverlayText(bool toggle)
+    {
+        if (this.blackOverlay != null)
+            this.blackOverlay.ToggleOverlayText(toggle);
     }
 }
 

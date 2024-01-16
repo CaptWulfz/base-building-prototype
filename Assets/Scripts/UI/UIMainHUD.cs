@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UIMainHUD : MonoBehaviour
 {
-    [SerializeField] UIBuildOptionsScreen buildOptionsScreen;
     [SerializeField] GameObject buildButton;
     [SerializeField] GameObject destroyButton;
     [SerializeField] Transform[] destroyButtonPositions;
@@ -23,11 +22,6 @@ public class UIMainHUD : MonoBehaviour
     }
 
     #region HUD Actions
-    public void OpenBuildOptionsScreen()
-    {
-        this.buildOptionsScreen.gameObject.SetActive(true);
-    }
-
     public void TurnOnBuildingMode()
     {
         GameManager.Instance.ChangeState(GameState.BUILDING);

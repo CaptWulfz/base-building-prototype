@@ -14,7 +14,7 @@ public class UIBuildOption : MonoBehaviour, IUIClickable
     [SerializeField] UIBuildOptionColor[] optionColors;
 
     private const string OPTION_NAME_FORMAT = "Name: {0}";
-    private const string OPTION_BUILD_TIME_FORMAT = "Build Time: {0}s";
+    private const string OPTION_BUILD_TIME_FORMAT = "{0}s";
 
     private string buildingId;
     private BuildingType buildingType;
@@ -24,7 +24,7 @@ public class UIBuildOption : MonoBehaviour, IUIClickable
         this.buildingId = data.BuildingId;
         this.buildingType = data.BuildingType;
         this.optionImage.sprite = data.BuildingSprites[0].RotationSprites[0];
-        this.optionName.text = string.Format(OPTION_NAME_FORMAT, data.BuildingName);
+        this.optionName.text = data.BuildingName;
         this.optionBuildTime.text = string.Format(OPTION_BUILD_TIME_FORMAT, data.BuildTime);
         SetBuildOptionColors(data);
     }

@@ -39,6 +39,11 @@ public class TilemapManager : Singleton<TilemapManager>
 
     public void GenerateTilemap(Vector2Int size)
     {
+        GameManager.Instance.ToggleBlackOverlayText(true);
+        Parameters param = new Parameters();
+        param.AddParameter(ParameterNames.TILEMAP_GENERATION_SCREEN_TOGGLE, false);
+        EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_TILEMAP_GENERATION_SCREEN, param);
+
         float tilesPerSideX = size.x / 2;
         int intTilesPerSideX = Mathf.FloorToInt(tilesPerSideX);
         int positiveXLimit = size.x % 2 == 0 ? intTilesPerSideX - 1 : intTilesPerSideX;
@@ -86,6 +91,8 @@ public class TilemapManager : Singleton<TilemapManager>
                 CreateNewTileAtPositon(newTilePos);
             }
         }
+
+        GameManager.Instance.ToggleBlackOverlay(false);
     }
 
     public void CreateNewTileAtPositon(Vector3Int position)
