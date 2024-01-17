@@ -27,5 +27,5 @@ MonoBehaviour:
   - BuildingColor: 4
     RotationSprites:
     - {fileID: 21300000, guid: fafafa8177b3f5d4cb5cbfc200a0287d, type: 3}
-  BuildTime: 5
+  BuildTime: 10
   BuildingType: 2

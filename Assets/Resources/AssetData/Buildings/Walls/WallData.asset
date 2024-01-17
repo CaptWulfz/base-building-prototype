@@ -19,5 +19,5 @@ MonoBehaviour:
     RotationSprites:
     - {fileID: 21300000, guid: 5fb24f997931cad44baaae16384cd521, type: 3}
     - {fileID: 21300000, guid: 4e4c81f517f1af54eb6820029b555845, type: 3}
-  BuildTime: 5
+  BuildTime: 2
   BuildingType: 0

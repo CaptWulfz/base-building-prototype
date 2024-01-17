@@ -27,13 +27,20 @@ public class BuildingManager : Singleton<BuildingManager>
         this.buildingDataMap = Resources.Load<BuildingDataMap>(ResourcesPaths.BUILDING_DATA_MAP_PATH);
         this.buildingRef = Resources.Load<Building>(ResourcesPaths.BUILDING_PATH);
         this.builtBuildingsList = new List<Building>();
-        this.MaxBuildingCount = this.buildingDataMap.MaxBuildingCount;
+        //this.MaxBuildingCount = this.buildingDataMap.MaxBuildingCount;
         this.allBuildingData = null;
         this.activeBuildingData = null;
-        PoolManager.Instance.CreatePool(PoolId.BUILDING, this.MaxBuildingCount);
+        //PoolManager.Instance.CreatePool(PoolId.BUILDING, this.MaxBuildingCount);
         this.currBuildingCount = 0;
 
         base.Initialize();
+    }
+
+    public void CreateBuildingPool(int maxCount)
+    {
+        this.MaxBuildingCount = maxCount;
+        PoolManager.Instance.CreatePool(PoolId.BUILDING, this.MaxBuildingCount);
+        UpdateBuildingCounterUI();
     }
 
     public void BuildBuilding(BuildingData data, int colorIdx, int spriteIdx, LandTile tileDestination)

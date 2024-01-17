@@ -40,6 +40,8 @@ public class TilemapManager : Singleton<TilemapManager>
     public void GenerateTilemap(Vector2Int size)
     {
         GameManager.Instance.ToggleBlackOverlayText(true);
+        BuildingManager.Instance.CreateBuildingPool(size.x * size.y / 2);
+
         Parameters param = new Parameters();
         param.AddParameter(ParameterNames.TILEMAP_GENERATION_SCREEN_TOGGLE, false);
         EventBroadcaster.Instance.PostEvent(UIEvents.TOGGLE_TILEMAP_GENERATION_SCREEN, param);
@@ -103,7 +105,7 @@ public class TilemapManager : Singleton<TilemapManager>
     {
         if (this.tilemap != null)
         {
-            LandTile newTile = new LandTile();
+            LandTile newTile = ScriptableObject.CreateInstance<LandTile>();
             newTile.sprite = this.tileData.TileSprite;
             newTile.TileState = TileState.AVAILABLE;
             newTile.TilePos = position;
