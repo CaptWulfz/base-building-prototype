@@ -8,10 +8,24 @@ public class TilemapManager : Singleton<TilemapManager>
     private Grid tilemapGrid;
     private Tilemap tilemap;
 
+    private BlockerDataMap blockerDataMap;
     private TileData tileData;
+
+    private GameObject blockersParent;
+    private Blocker blockerRef;
+
+    private int maxBlockerCount;
+    private int currBlockerCount;
+
     protected override void Initialize()
     {
+        this.blockerDataMap = Resources.Load<BlockerDataMap>(ResourcesPaths.BLOCKER_DATA_MAP_PATH);
         this.tileData = Resources.Load<TileData>(ResourcesPaths.TILE_DATA_PATH);
+        this.blockersParent = new GameObject();
+        this.blockersParent.name = "Blockers Parent";
+        this.blockerRef = Resources.Load<Blocker>(ResourcesPaths.BLOCKER_PATH);
+        this.blockerRef.gameObject.SetActive(false);
+        this.currBlockerCount = 0;
         base.Initialize();
     }
 
@@ -40,7 +54,13 @@ public class TilemapManager : Singleton<TilemapManager>
     public void GenerateTilemap(Vector2Int size)
     {
         GameManager.Instance.ToggleBlackOverlayText(true);
-        BuildingManager.Instance.CreateBuildingPool(size.x * size.y / 2);
+        int tileCount = size.x * size.y;
+        this.maxBlockerCount = tileCount / 8;
+        if (this.maxBlockerCount < 0)
+            this.maxBlockerCount = 1;
+
+        BuildingManager.Instance.CreateBuildingPool(tileCount/ 2);
+        PoolManager.Instance.CreatePool(PoolId.BLOCKER, this.maxBlockerCount);
 
         Parameters param = new Parameters();
         param.AddParameter(ParameterNames.TILEMAP_GENERATION_SCREEN_TOGGLE, false);
@@ -110,6 +130,31 @@ public class TilemapManager : Singleton<TilemapManager>
             newTile.TileState = TileState.AVAILABLE;
             newTile.TilePos = position;
             this.tilemap.SetTile(position, newTile);
+
+            // Try Create Blocker
+            CreateBlockerAtTile(newTile);
+        }
+    }
+
+    private void CreateBlockerAtTile(LandTile tile)
+    {
+        bool createBlocker = this.currBlockerCount < this.maxBlockerCount ? Random.Range(0, 2) == 0 : false;
+        if (createBlocker)
+        {
+            int blockerIdx = Random.Range(0, this.blockerDataMap.BlockerData.Length);
+            BlockerData data = this.blockerDataMap.BlockerData[blockerIdx];
+            int spriteIdx = Random.Range(0, data.BlockerSprites.Length);
+            Sprite blockerSprite = data.BlockerSprites[spriteIdx];
+            Blocker newBlocker = PoolManager.Instance.BlockerPool.Get(() =>
+            {
+                return GameObject.Instantiate(this.blockerRef, this.blockersParent.transform);
+            });
+            newBlocker.SetData(blockerSprite);
+            newBlocker.gameObject.transform.SetAsLastSibling();
+            newBlocker.gameObject.SetActive(true);
+            newBlocker.transform.position = GetWorldCenterFromTile(tile.TilePos);
+            tile.TileState = TileState.UNAVAILABLE;
+            this.currBlockerCount++;
         }
     }
 

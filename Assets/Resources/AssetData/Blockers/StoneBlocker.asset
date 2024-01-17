@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6b12fa645a48b24ca27192f002412b2, type: 3}
+  m_Name: StoneBlocker
+  m_EditorClassIdentifier: 
+  BlockerName: Stone
+  BlockerSprites:
+  - {fileID: 21300000, guid: a602b530a4d102a4d8fcb7d9f0fd0d9e, type: 3}
+  - {fileID: 21300000, guid: 0b5c67fc6bbbacc4abd151336f122ea1, type: 3}
+  - {fileID: 21300000, guid: fee5c2ea4319160499691a6329eb89c7, type: 3}
+  - {fileID: 21300000, guid: 37e19a6de5e8fe144a4c062038cda215, type: 3}

@@ -10,6 +10,8 @@ public class BuildingManager : Singleton<BuildingManager>
     private BuildingPlaceholder buildingPlaceholder;
     private DestroyingPlaceholder destroyingPlaceholder;
 
+    private GameObject buildingsParent;
+
     private List<Building> builtBuildingsList;
 
     public int MaxBuildingCount { get; private set; }
@@ -27,6 +29,7 @@ public class BuildingManager : Singleton<BuildingManager>
         this.buildingDataMap = Resources.Load<BuildingDataMap>(ResourcesPaths.BUILDING_DATA_MAP_PATH);
         this.buildingRef = Resources.Load<Building>(ResourcesPaths.BUILDING_PATH);
         this.builtBuildingsList = new List<Building>();
+        CreateBuildingsParent();
         //this.MaxBuildingCount = this.buildingDataMap.MaxBuildingCount;
         this.allBuildingData = null;
         this.activeBuildingData = null;
@@ -34,6 +37,12 @@ public class BuildingManager : Singleton<BuildingManager>
         this.currBuildingCount = 0;
 
         base.Initialize();
+    }
+
+    private void CreateBuildingsParent()
+    {
+        this.buildingsParent ??= new GameObject();
+        this.buildingsParent.name = "Buildings Parent";
     }
 
     public void CreateBuildingPool(int maxCount)
@@ -54,9 +63,10 @@ public class BuildingManager : Singleton<BuildingManager>
         if (data != null)
         {
             Building newBuilding = PoolManager.Instance.BuildingPool.Get(() => {
-                return GameObject.Instantiate<Building>(this.buildingRef);
+                return GameObject.Instantiate<Building>(this.buildingRef, this.buildingsParent.transform);
             });
             newBuilding.SetData(data, colorIdx, spriteIdx);
+            newBuilding.gameObject.transform.SetAsLastSibling();
             newBuilding.gameObject.SetActive(true);
             newBuilding.Build();
             newBuilding.transform.position = TilemapManager.Instance.GetWorldCenterFromTile(tileDestination.TilePos);
@@ -222,14 +232,21 @@ public class BuildingManager : Singleton<BuildingManager>
         if (!this.AllowEditing)
             return;
 
-        TileState hoveredTile = TilemapManager.Instance.GetTileAvailabilityFromMousePos(mousePos);
+        //TileState hoveredTile = TilemapManager.Instance.GetTileAvailabilityFromMousePos(mousePos);
+        LandTile tile = TilemapManager.Instance.GetTileFromMousePos(mousePos);
 
-        if (hoveredTile == TileState.NO_TILE)
+        if (tile == null)
+        {
+            this.destroyingPlaceholder.TogglePlaceholder(false);
+            return;
+        }
+
+        if (tile.TileState == TileState.NO_TILE)
         {
             this.destroyingPlaceholder.TogglePlaceholder(false);
         } else
         {
-            this.destroyingPlaceholder.ChangeTileHighlightColor(hoveredTile == TileState.UNAVAILABLE);
+            this.destroyingPlaceholder.ChangeTileHighlightColor(tile.TileState == TileState.UNAVAILABLE && tile.inhabitingBuilding != null);
             this.destroyingPlaceholder.TogglePlaceholder(true);
             this.destroyingPlaceholder.ChangePosition(TilemapManager.Instance.GetTileCenterFromMousePos(mousePos));
         }

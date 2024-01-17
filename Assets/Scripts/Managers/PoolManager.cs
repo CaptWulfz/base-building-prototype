@@ -6,7 +6,7 @@ public class PoolManager : Singleton<PoolManager>
 {
     public ObjectPool<Building> BuildingPool { get; private set; }
     public ObjectPool<UIBuildOption> UIBuildOptionPool { get; private set; }
-
+    public ObjectPool<Blocker> BlockerPool { get; private set; }
     protected override void Initialize()
     {
         base.Initialize();
@@ -22,6 +22,9 @@ public class PoolManager : Singleton<PoolManager>
             case PoolId.UI_BUILDING_OPTION:
                 this.UIBuildOptionPool ??= new ObjectPool<UIBuildOption>(poolSize);
                 break;
+            case PoolId.BLOCKER:
+                this.BlockerPool ??= new ObjectPool<Blocker>(poolSize);
+                break;
         }
     }
 }
@@ -30,4 +33,5 @@ public class PoolId
 {
     public const string BUILDING = "BUILDING";
     public const string UI_BUILDING_OPTION = "UI_BUILDING_OPTION";
+    public const string BLOCKER = "BLOCKER";
 }

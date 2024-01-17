@@ -8,4 +8,11 @@ public static class ResourcesPaths
 
     // Building Ref
     public static string BUILDING_PATH = "Prefabs/Building";
+
+    // Blocker Data Map Paths
+    public static string BLOCKER_DATA_MAP_PATH = "AssetData/Blockers/BlockerDataMap";
+
+    // Blocker Ref
+    // Building Ref
+    public static string BLOCKER_PATH = "Prefabs/Blocker";
 }
